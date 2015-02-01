@@ -1,8 +1,8 @@
 controllers = angular.module('controllers');
 
 controllers.controller("RecipeController", [
-    '$scope', '$routeParams', '$resource', 'flash',
-    function ($scope, $routeParams, $resource, flash) {
+    '$scope', '$routeParams', '$resource', 'flash', '$location',
+    function ($scope, $routeParams, $resource, flash, $location) {
         var Recipe;
 
         Recipe = $resource('/recipes/:recipeId', {
@@ -19,5 +19,7 @@ controllers.controller("RecipeController", [
             flash.error = "There is no recipe with ID " + $routeParams.recipeId;
         }));
 
-
+        $scope.back = function(){
+            $location.path('/');
+        };
     }]);
