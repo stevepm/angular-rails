@@ -1,8 +1,8 @@
 controllers = angular.module('controllers');
 
 controllers.controller("RecipeController", [
-    '$scope', '$routeParams', '$resource',
-    function ($scope, $routeParams, $resource) {
+    '$scope', '$routeParams', '$resource', 'flash',
+    function ($scope, $routeParams, $resource, flash) {
         var Recipe;
 
         Recipe = $resource('/recipes/:recipeId', {
@@ -12,10 +12,11 @@ controllers.controller("RecipeController", [
 
         Recipe.get({
             recipeId: $routeParams.recipeId
-        }, (function(recipe) {
-            return $scope.recipe = recipe;
-        }), (function(httpResponse) {
-            return $scope.recipe = null;
+        }, (function (recipe) {
+            $scope.recipe = recipe;
+        }), (function (httpResponse) {
+            $scope.recipe = null;
+            flash.error = "There is no recipe with ID " + $routeParams.recipeId;
         }));
 
 

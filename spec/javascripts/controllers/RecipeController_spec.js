@@ -1,6 +1,7 @@
 describe("RecipeController", function () {
-    var ctrl, fakeRecipe, httpBackend, recipeId, routeParams, scope, setupController;
+    var ctrl, fakeRecipe, httpBackend, recipeId, routeParams, scope, setupController, flash;
     scope = null;
+    flash = null;
     ctrl = null;
     routeParams = null;
     httpBackend = null;
@@ -14,13 +15,14 @@ describe("RecipeController", function () {
         if (recipeExists == null) {
             recipeExists = true;
         }
-        inject(function ($location, $routeParams, $rootScope, $httpBackend, $controller) {
+        inject(function ($location, $routeParams, $rootScope, $httpBackend, $controller, _flash_) {
             var location;
             scope = $rootScope.$new();
             location = $location;
             httpBackend = $httpBackend;
             routeParams = $routeParams;
             routeParams.recipeId = recipeId;
+            flash = _flash_;
 
             var request, results;
 
@@ -61,6 +63,7 @@ describe("RecipeController", function () {
             it('loads the given recipe', function () {
                 httpBackend.flush();
                 expect(scope.recipe).toBe(null);
+                expect(flash.error).toBe("There is no recipe with ID " + recipeId);
             });
         });
     });
