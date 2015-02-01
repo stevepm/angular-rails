@@ -10,6 +10,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         .when('/', {
             templateUrl: "index.html",
             controller: "RecipesController"
+        })
+        .when('/recipes/:recipeId', {
+            templateUrl: "show.html",
+            controller: "RecipeController"
         });
 }]);
 
