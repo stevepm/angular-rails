@@ -27,4 +27,12 @@ controllers.controller("RecipesController",
                 $location.path("/recipes/" + recipeId);
             };
 
+            $scope.newRecipe = function(){
+                $location.path("/recipes/new");
+            };
+
+            $scope.edit = function(recipeId){
+                $location.path("/recipes/" + recipeId + "/edit");
+            };
+
         }]);
